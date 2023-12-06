@@ -9,11 +9,11 @@
 body {
   min-height: 100vh;
   padding: 1rem;
-  // background-color: $color-black-900;
+  background-color: $color-black-900;
   background: radial-gradient(
     circle at 30% 10%,
-    $color-purple-accent-900 20%,
-    $color-black-900 60%
+    $color-purple-accent-900,
+    $color-black-900 50%
   );
 
   display: flex;
