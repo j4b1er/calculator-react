@@ -1,0 +1,14 @@
+.calculator {
+  height: 600px;
+  width: 300px;
+  background-color: $color-black-900;
+  border-radius: 2rem;
+  overflow: hidden;
+
+  border: 1px solid $color-purple-accent-900;
+
+  &__header {
+    height: 200px;
+    background-color: $color-black-600;
+  }
+}

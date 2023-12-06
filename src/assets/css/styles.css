@@ -1,0 +1,25 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+body {
+  min-height: 100vh;
+  padding: 1rem;
+  background: radial-gradient(circle at 30% 10%, #2d1356 20%, #121212 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.calculator {
+  height: 600px;
+  width: 300px;
+  background-color: #121212;
+  border-radius: 2rem;
+  overflow: hidden;
+  border: 1px solid #2d1356; }
+  .calculator__header {
+    height: 200px;
+    background-color: #1a1a1a; }
