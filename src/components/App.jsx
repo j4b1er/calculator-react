@@ -20,8 +20,8 @@ function reducer(state, action) {
       return {
         ...state,
         frontNum:
-          state.frontNum !== "0"
-            ? `${state.frontNum}${action.payload}`
+          state.frontNum !== "0" && state.mathAction === ""
+            ? state.frontNum + action.payload
             : action.payload,
       };
 
@@ -32,6 +32,13 @@ function reducer(state, action) {
           arrayLength === 1
             ? "0"
             : frontNumArr.filter((num, i) => i !== arrayLength - 1).join(""),
+      };
+
+    case "addition":
+      return {
+        ...state,
+        backNum: state.frontNum,
+        mathAction: action.payload,
       };
 
     default:
@@ -57,9 +64,9 @@ export default function App() {
         <div className="calculator__header--calc">
           <div className="calculator__header--past">{`${
             backNum !== "0"
-              ? `${backNum} ${mathAction} ${frontNum ? frontNum : ""} ${
-                  result === null ? "" : "="
-                }`
+              ? `${backNum} ${mathAction} ${
+                  frontNum !== "0" && mathAction === "" ? frontNum : ""
+                } ${result === null ? "" : "="}`
               : ""
           }`}</div>
           <div className="calculator__header--curr">
