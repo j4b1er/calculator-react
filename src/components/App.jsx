@@ -2,13 +2,49 @@ import Header from "./Header";
 import Body from "./Body";
 import Button from "./Button";
 import { buttons } from "../data/buttons";
+import { useReducer } from "react";
 
 const initialState = {
-  entryNum: 0,
-  upperNum: 0,
+  frontNum: "0",
+  backNum: "0",
+  mathAction: "",
+  result: null,
 };
 
+function reducer(state, action) {
+  const frontNumArr = state.frontNum.split("");
+  const arrayLength = state.frontNum.length;
+
+  switch (action.type) {
+    case "num":
+      return {
+        ...state,
+        frontNum:
+          state.frontNum !== "0"
+            ? `${state.frontNum}${action.payload}`
+            : action.payload,
+      };
+
+    case "erase":
+      return {
+        ...state,
+        frontNum:
+          arrayLength === 1
+            ? "0"
+            : frontNumArr.filter((num, i) => i !== arrayLength - 1).join(""),
+      };
+
+    default:
+      throw new Error("Unknown action");
+  }
+}
+
 export default function App() {
+  const [{ frontNum, backNum, mathAction, result }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
+
   return (
     <div className="calculator">
       <Header>
@@ -19,13 +55,21 @@ export default function App() {
           Calculator
         </h1>
         <div className="calculator__header--calc">
-          <div className="calculator__header--past">10 / </div>
-          <div className="calculator__header--curr">100</div>
+          <div className="calculator__header--past">{`${
+            backNum !== "0"
+              ? `${backNum} ${mathAction} ${frontNum ? frontNum : ""} ${
+                  result === null ? "" : "="
+                }`
+              : ""
+          }`}</div>
+          <div className="calculator__header--curr">
+            {result === null ? frontNum : result}
+          </div>
         </div>
       </Header>
       <Body>
         {buttons.map((btn) => (
-          <Button button={btn} key={btn.name} />
+          <Button button={btn} dispatch={dispatch} key={btn.name} />
         ))}
       </Body>
     </div>
