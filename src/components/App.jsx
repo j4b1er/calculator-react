@@ -20,7 +20,7 @@ function reducer(state, action) {
       return {
         ...state,
         frontNum:
-          state.frontNum !== "0" && state.mathAction === ""
+          state.frontNum !== "0"
             ? state.frontNum + action.payload
             : action.payload,
       };
@@ -38,6 +38,7 @@ function reducer(state, action) {
       return {
         ...state,
         backNum: state.frontNum,
+        frontNum: "0",
         mathAction: action.payload,
       };
 
@@ -70,7 +71,7 @@ export default function App() {
               : ""
           }`}</div>
           <div className="calculator__header--curr">
-            {result === null ? frontNum : result}
+            {result === null ? (frontNum === "0" ? backNum : frontNum) : result}
           </div>
         </div>
       </Header>
