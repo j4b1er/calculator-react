@@ -2,7 +2,7 @@
   background: $color-black-600;
   color: $color-white-100;
   border: none;
-  border-radius: 1.25rem;
+  border-radius: 0.75rem;
   transition: all 0.2s;
   font-size: 1rem;
 
@@ -14,11 +14,20 @@
     font-size: 1.75rem;
   }
 
-  &__num0 {
+  &__subtract {
+    font-size: 1.75rem;
+  }
+
+  &__addition {
+    font-size: 1.75rem;
+  }
+
+  &__num-0 {
     grid-column-start: span 2;
   }
 
   &__result {
+    font-size: 1.75rem;
     background-color: $color-purple-accent-900;
 
     &:hover {
