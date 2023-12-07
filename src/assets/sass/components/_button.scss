@@ -1,0 +1,28 @@
+.btn {
+  background: $color-black-600;
+  color: $color-white-100;
+  border: none;
+  border-radius: 1.25rem;
+  transition: all 0.2s;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: $color-black-300;
+  }
+
+  &__division {
+    font-size: 1.75rem;
+  }
+
+  &__num0 {
+    grid-column-start: span 2;
+  }
+
+  &__result {
+    background-color: $color-purple-accent-900;
+
+    &:hover {
+      background-color: $color-purple-accent-300;
+    }
+  }
+}
