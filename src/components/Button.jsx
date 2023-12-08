@@ -4,7 +4,7 @@ export default function Button({ button, dispatch }) {
       className={`btn btn__${
         button.name === "0" ? `${button.action}-${button.name}` : button.action
       }`}
-      onClick={() => dispatch({ type: button.action, payload: button.name })}>
+      onClick={() => dispatch({ type: button.action, payload: button })}>
       {button.name}
     </button>
   );

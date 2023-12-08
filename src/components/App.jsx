@@ -8,6 +8,7 @@ const initialState = {
   frontNum: "0",
   backNum: "0",
   mathAction: "",
+  mathSign: "",
   result: null,
 };
 
@@ -21,8 +22,8 @@ function reducer(state, action) {
         ...state,
         frontNum:
           state.frontNum !== "0"
-            ? state.frontNum + action.payload
-            : action.payload,
+            ? state.frontNum + action.payload.name
+            : action.payload.name,
       };
 
     case "erase":
@@ -35,17 +36,22 @@ function reducer(state, action) {
       };
 
     case "addition":
+    case "subtract":
+    case "multiply":
+    case "division":
+    case "mod":
       return {
         ...state,
         backNum: state.frontNum,
         frontNum: "0",
-        mathAction: action.payload,
+        mathAction: action.payload.name,
+        mathSign: action.payload.sign,
       };
 
     case "result":
       return {
         ...state,
-        result: eval(state.frontNum + state.mathAction + state.backNum),
+        result: eval(state.backNum + state.mathSign + state.frontNum),
       };
 
     default:
@@ -54,10 +60,8 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ frontNum, backNum, mathAction, result }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ frontNum, backNum, mathAction, mathSign, result }, dispatch] =
+    useReducer(reducer, initialState);
 
   return (
     <div className="calculator">
