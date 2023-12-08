@@ -14,7 +14,8 @@ const initialState = {
 
 function reducer(state, action) {
   const frontNumArr = state.frontNum.split("");
-  const arrayLength = state.frontNum.length;
+  const frontNumArrLength = state.frontNum.length;
+  const backNumArr = state.backNum.split(" ");
 
   switch (action.type) {
     case "num":
@@ -30,9 +31,12 @@ function reducer(state, action) {
       return {
         ...state,
         frontNum:
-          arrayLength === 1
+          frontNumArrLength === 1
             ? "0"
-            : frontNumArr.filter((num, i) => i !== arrayLength - 1).join(""),
+            : frontNumArr
+                .filter((num, i) => i !== frontNumArrLength - 1)
+                .join(""),
+        backNum: state.result ? "0" : state.backNum,
       };
 
     case "addition":
@@ -42,16 +46,20 @@ function reducer(state, action) {
     case "mod":
       return {
         ...state,
-        backNum: state.frontNum,
+        backNum: `${state.frontNum} ${action.payload.name}`,
         frontNum: "0",
         mathAction: action.payload.name,
         mathSign: action.payload.sign,
       };
 
     case "result":
+      console.log(backNumArr);
       return {
         ...state,
-        result: eval(state.backNum + state.mathSign + state.frontNum),
+        backNum: `${state.backNum} ${state.frontNum}`,
+        result: Function(
+          "return " + backNumArr.at(0) + state.mathSign + state.frontNum
+        )(),
       };
 
     default:
@@ -60,8 +68,10 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ frontNum, backNum, mathAction, mathSign, result }, dispatch] =
-    useReducer(reducer, initialState);
+  const [{ frontNum, backNum, mathAction, result }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   return (
     <div className="calculator">
@@ -73,19 +83,11 @@ export default function App() {
           Calculator
         </h1>
         <div className="calculator__header--calc">
-          <div className="calculator__header--past">{`${
-            backNum !== "0"
-              ? `${backNum} ${mathAction} ${
-                  frontNum !== "0" && mathAction !== "" ? frontNum : ""
-                } ${result === null ? "" : "="}`
-              : ""
-          }`}</div>
+          <div className="calculator__header--past">
+            {backNum !== "0" ? backNum : ""}
+          </div>
           <div className="calculator__header--curr">
-            {result === null
-              ? frontNum === "0" && backNum !== "0"
-                ? backNum
-                : frontNum
-              : result}
+            {result === null ? frontNum : result}
           </div>
         </div>
       </Header>

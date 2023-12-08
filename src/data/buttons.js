@@ -5,11 +5,6 @@ export const buttons = [
     action: "mod",
   },
   {
-    name: "÷",
-    sign: "/",
-    action: "division",
-  },
-  {
     name: "CE",
     sign: "CE",
     action: "clear",
@@ -18,6 +13,11 @@ export const buttons = [
     name: "←",
     sign: "←",
     action: "erase",
+  },
+  {
+    name: "÷",
+    sign: "/",
+    action: "division",
   },
   {
     name: "7",
