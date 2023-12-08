@@ -1,10 +1,14 @@
 export default function Button({ button, dispatch }) {
+  function handleClick() {
+    dispatch({ type: button.action, payload: button });
+  }
+
   return (
     <button
       className={`btn btn__${
         button.name === "0" ? `${button.action}-${button.name}` : button.action
       }`}
-      onClick={() => dispatch({ type: button.action, payload: button })}>
+      onClick={handleClick}>
       {button.name}
     </button>
   );

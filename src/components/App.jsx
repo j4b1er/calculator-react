@@ -48,6 +48,12 @@ function reducer(state, action) {
         ...state,
         backNum: `${state.frontNum} ${action.payload.name}`,
         frontNum: "0",
+        // frontNum:
+        //   state.backNum !== "0"
+        //     ? Function(
+        //         "return " + state.backNum + action.payload.sign + state.frontNum
+        //       )()
+        //     : "0",
         mathAction: action.payload.name,
         mathSign: action.payload.sign,
       };
@@ -70,7 +76,7 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ frontNum, backNum, mathAction, result }, dispatch] = useReducer(
+  const [{ frontNum, backNum, result }, dispatch] = useReducer(
     reducer,
     initialState
   );
