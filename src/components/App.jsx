@@ -25,12 +25,6 @@ function reducer(state, action) {
             : action.payload,
       };
 
-    // return {
-    //   ...state,
-    //   frontNum:
-    //     state.frontNum !== "0" ? state.mathAction !== "" ? state.frontNum + action.payload :  : action.payload
-    // };
-
     case "erase":
       return {
         ...state,
@@ -44,7 +38,7 @@ function reducer(state, action) {
       return {
         ...state,
         backNum: state.frontNum,
-        // frontNum: "0",
+        frontNum: "0",
         mathAction: action.payload,
       };
 
@@ -77,8 +71,11 @@ export default function App() {
               : ""
           }`}</div>
           <div className="calculator__header--curr">
-            {/* {result === null ? (frontNum === "0" ? backNum : frontNum) : result} */}
-            {result === null ? frontNum : result}
+            {result === null
+              ? frontNum === "0" && backNum !== "0"
+                ? backNum
+                : frontNum
+              : result}
           </div>
         </div>
       </Header>
