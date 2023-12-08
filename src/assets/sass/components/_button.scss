@@ -1,10 +1,14 @@
 .btn {
+  cursor: pointer;
+
   background: $color-black-600;
   color: $color-white-100;
+  font-size: 1rem;
+
   border: none;
   border-radius: 0.75rem;
+
   transition: all 0.2s;
-  font-size: 1rem;
 
   &:hover {
     background-color: $color-black-300;
