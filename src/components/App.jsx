@@ -42,6 +42,12 @@ function reducer(state, action) {
         mathAction: action.payload,
       };
 
+    case "result":
+      return {
+        ...state,
+        result: eval(state.frontNum + state.mathAction + state.backNum),
+      };
+
     default:
       throw new Error("Unknown action");
   }
@@ -66,7 +72,7 @@ export default function App() {
           <div className="calculator__header--past">{`${
             backNum !== "0"
               ? `${backNum} ${mathAction} ${
-                  frontNum !== "0" && mathAction === "" ? frontNum : ""
+                  frontNum !== "0" && mathAction !== "" ? frontNum : ""
                 } ${result === null ? "" : "="}`
               : ""
           }`}</div>
