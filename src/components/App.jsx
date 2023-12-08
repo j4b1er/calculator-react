@@ -53,7 +53,6 @@ function reducer(state, action) {
       };
 
     case "result":
-      console.log(backNumArr);
       return {
         ...state,
         backNum: `${state.backNum} ${state.frontNum}`,
@@ -61,6 +60,9 @@ function reducer(state, action) {
           "return " + backNumArr.at(0) + state.mathSign + state.frontNum
         )(),
       };
+
+    case "clear":
+      return { ...initialState };
 
     default:
       throw new Error("Unknown action");
