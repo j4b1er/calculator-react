@@ -3,9 +3,18 @@ import { useEffect } from "react";
 export function useKey(buttons, dispatch) {
   useEffect(() => {
     const checkKey = (e) => {
+      const isShiftPressed = e.shiftKey;
+      console.log(isShiftPressed);
+
       buttons.forEach((button) => {
         button.btnkeys.forEach((key) => {
-          if (e.code.toLowerCase() === key.toLowerCase())
+          let keyPressed = e.code.toLowerCase();
+          if (
+            isShiftPressed &&
+            (keyPressed === "digit8" || keyPressed === "equal")
+          )
+            keyPressed = `shift${keyPressed}`;
+          if (keyPressed === key.toLowerCase())
             dispatch({ type: button.action, payload: button });
         });
       });

@@ -45,7 +45,7 @@ export const buttons = [
     name: "X",
     sign: "*",
     action: "multiply",
-    btnkeys: ["NumpadMultiply", "ShiftDigit8"],
+    btnkeys: ["NumpadMultiply", "Shiftdigit8"],
   },
   {
     name: "4",
@@ -93,7 +93,7 @@ export const buttons = [
     name: "+",
     sign: "+",
     action: "addition",
-    btnkeys: ["NumpadAdd", "ShiftEqual"],
+    btnkeys: ["NumpadAdd", "Shiftequal"],
   },
   {
     name: "0",
