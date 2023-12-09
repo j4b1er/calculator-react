@@ -3,6 +3,7 @@ import Body from "./Body";
 import Button from "./Button";
 import { buttons } from "../data/buttons";
 import { useReducer } from "react";
+import { useKey } from "../hooks/useKey";
 
 const initialState = {
   frontNum: "0",
@@ -80,6 +81,8 @@ export default function App() {
     reducer,
     initialState
   );
+
+  useKey(buttons, dispatch);
 
   return (
     <div className="calculator">
