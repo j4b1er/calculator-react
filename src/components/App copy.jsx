@@ -19,9 +19,6 @@ function reducer(state, action) {
   const backNumArr = state.backNum.split(" ");
   const resultFunc = Function(
     "return " + backNumArr.at(0) + state.mathSign + state.frontNum
-    // "return " + state.backNum !== "0"
-    //   ? backNumArr.at(0) + state.mathSign + state.frontNum
-    //   : state.frontNum
   )();
 
   switch (action.type) {
@@ -43,6 +40,7 @@ function reducer(state, action) {
             : frontNumArr
                 .filter((num, i) => i !== frontNumArrLength - 1)
                 .join(""),
+        backNum: state.result ? "0" : state.backNum,
       };
 
     case "addition":
@@ -52,25 +50,24 @@ function reducer(state, action) {
     case "mod":
       return {
         ...state,
-        backNum:
-          state.mathAction && !state.backNum.includes("=")
-            ? `${resultFunc} ${action.payload.name}`
-            : `${state.frontNum} ${action.payload.name}`,
+        backNum: state.mathAction
+          ? `${resultFunc} ${action.payload.name}`
+          : `${state.frontNum} ${action.payload.name}`,
         frontNum: "0",
         // frontNum: state.mathAction ? state.frontNum : "0",
         mathAction: action.payload.name,
         mathSign: action.payload.sign,
-        // result:
-        //   state.backNum !== "0" && state.mathAction !== ""
-        //     ? resultFunc
-        //     : state.result,
+        result:
+          state.backNum !== "0" && state.mathAction !== ""
+            ? resultFunc
+            : state.result,
       };
 
     case "result":
       return {
         ...state,
-        frontNum: `${resultFunc}`,
-        backNum: `${state.backNum} ${state.frontNum} =`,
+        backNum: `${state.backNum} ${state.frontNum}`,
+        result: resultFunc,
       };
 
     case "clear":
@@ -82,7 +79,10 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ frontNum, backNum }, dispatch] = useReducer(reducer, initialState);
+  const [{ frontNum, backNum, result }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   useKey(buttons, dispatch);
 
@@ -100,8 +100,7 @@ export default function App() {
             {backNum !== "0" ? backNum : ""}
           </div>
           <div className="calculator__header--curr">
-            {/* {result === null ? frontNum : result} */}
-            {frontNum}
+            {result === null ? frontNum : result}
           </div>
         </div>
       </Header>

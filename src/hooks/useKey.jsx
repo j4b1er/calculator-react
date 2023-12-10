@@ -10,6 +10,7 @@ export function useKey(buttons, dispatch) {
           let keyPressed = e.code.toLowerCase();
           if (isShiftPressed) keyPressed = `shift${keyPressed}`;
 
+          console.log(keyPressed);
           if (keyPressed === key.toLowerCase())
             dispatch({ type: button.action, payload: button });
         });
@@ -19,5 +20,5 @@ export function useKey(buttons, dispatch) {
     document.addEventListener("keydown", checkKey);
 
     return () => document.removeEventListener("keydown", checkKey);
-  }, []);
+  }, [buttons, dispatch]);
 }
