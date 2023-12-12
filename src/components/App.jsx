@@ -17,14 +17,12 @@ function reducer(state, action) {
   const frontNumArr = state.frontNum.split("");
   const frontNumArrLength = frontNumArr.length;
   const backNumArr = state.backNum.split(" ");
-  // console.log(state.frontNum);
-  // console.log(backNumArr.at(0));
-  // const resultFunc = 10;
-  const resultFunc = Function(
-    "return " + backNumArr.at(0) + state.mathSign + state.frontNum
-  )();
-
-  console.log(resultFunc);
+  const resultFunc =
+    state.backNum !== "0"
+      ? Function(
+          "return " + backNumArr.at(0) + state.mathSign + state.frontNum
+        )()
+      : "0";
 
   switch (action.type) {
     case "num":
@@ -66,14 +64,17 @@ function reducer(state, action) {
     case "result":
       return {
         ...state,
-        frontNum: `${resultFunc}`,
-        backNum: `${state.backNum} ${state.frontNum} =`,
+        frontNum: state.backNum !== "0" ? `${resultFunc}` : state.frontNum,
+        backNum:
+          state.backNum !== "0" ? `${state.backNum} ${state.frontNum} =` : "0",
       };
 
     case "period":
       return {
         ...state,
-        frontNum: state.frontNum + action.payload.name,
+        frontNum: !state.frontNum.includes(".")
+          ? state.frontNum + action.payload.name
+          : state.frontNum,
       };
 
     case "clear":
@@ -85,7 +86,8 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ frontNum, backNum }, dispatch] = useReducer(reducer, initialState);
+  const [{ frontNum, backNum, mathAction, mathSign, result }, dispatch] =
+    useReducer(reducer, initialState);
 
   useKey(buttons, dispatch);
 

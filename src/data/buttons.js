@@ -37,7 +37,7 @@ export const buttons = [
   },
   {
     name: "9",
-    sign: "8",
+    sign: "9",
     action: "num",
     btnkeys: ["Numpad9", "Digit9"],
   },
