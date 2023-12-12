@@ -15,14 +15,16 @@ const initialState = {
 
 function reducer(state, action) {
   const frontNumArr = state.frontNum.split("");
-  const frontNumArrLength = state.frontNum.length;
+  const frontNumArrLength = frontNumArr.length;
   const backNumArr = state.backNum.split(" ");
+  // console.log(state.frontNum);
+  // console.log(backNumArr.at(0));
+  // const resultFunc = 10;
   const resultFunc = Function(
     "return " + backNumArr.at(0) + state.mathSign + state.frontNum
-    // "return " + state.backNum !== "0"
-    //   ? backNumArr.at(0) + state.mathSign + state.frontNum
-    //   : state.frontNum
   )();
+
+  console.log(resultFunc);
 
   switch (action.type) {
     case "num":
@@ -57,13 +59,8 @@ function reducer(state, action) {
             ? `${resultFunc} ${action.payload.name}`
             : `${state.frontNum} ${action.payload.name}`,
         frontNum: "0",
-        // frontNum: state.mathAction ? state.frontNum : "0",
         mathAction: action.payload.name,
         mathSign: action.payload.sign,
-        // result:
-        //   state.backNum !== "0" && state.mathAction !== ""
-        //     ? resultFunc
-        //     : state.result,
       };
 
     case "result":
@@ -71,6 +68,12 @@ function reducer(state, action) {
         ...state,
         frontNum: `${resultFunc}`,
         backNum: `${state.backNum} ${state.frontNum} =`,
+      };
+
+    case "period":
+      return {
+        ...state,
+        frontNum: state.frontNum + action.payload.name,
       };
 
     case "clear":
@@ -99,10 +102,7 @@ export default function App() {
           <div className="calculator__header--past">
             {backNum !== "0" ? backNum : ""}
           </div>
-          <div className="calculator__header--curr">
-            {/* {result === null ? frontNum : result} */}
-            {frontNum}
-          </div>
+          <div className="calculator__header--curr">{frontNum}</div>
         </div>
       </Header>
       <Body>
