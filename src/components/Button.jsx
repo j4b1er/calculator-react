@@ -1,4 +1,4 @@
-export default function Button({ button, dispatch }) {
+export default function Button({ button, dispatch, theme }) {
   function handleClick() {
     dispatch({ type: button.action, payload: button });
   }

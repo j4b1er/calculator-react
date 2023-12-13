@@ -1,8 +1,8 @@
 export const buttons = [
   {
-    name: "%",
+    name: "theme",
     sign: "%",
-    action: "mod",
+    action: "switchTheme",
     btnkeys: [],
   },
   {

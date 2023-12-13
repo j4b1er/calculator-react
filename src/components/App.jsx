@@ -10,6 +10,7 @@ const initialState = {
   backNum: "0",
   mathAction: "",
   mathSign: "",
+  theme: "dark",
 };
 
 function reducer(state, action) {
@@ -49,7 +50,6 @@ function reducer(state, action) {
     case "subtract":
     case "multiply":
     case "division":
-    case "mod":
       return {
         ...state,
         backNum:
@@ -83,6 +83,9 @@ function reducer(state, action) {
           : state.frontNum,
       };
 
+    case "switchTheme":
+      return { ...state };
+
     case "clear":
       return { ...initialState };
 
@@ -92,7 +95,10 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ frontNum, backNum }, dispatch] = useReducer(reducer, initialState);
+  const [{ frontNum, backNum, theme }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   useKey(buttons, dispatch);
 
@@ -114,7 +120,12 @@ export default function App() {
       </Header>
       <Body>
         {buttons.map((btn) => (
-          <Button button={btn} dispatch={dispatch} key={btn.name} />
+          <Button
+            button={btn}
+            dispatch={dispatch}
+            theme={theme}
+            key={btn.name}
+          />
         ))}
       </Body>
     </div>
