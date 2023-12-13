@@ -9,7 +9,7 @@ export default function Button({ button, dispatch }) {
         button.name === "0" ? `${button.action}-${button.name}` : button.action
       }`}
       onClick={handleClick}>
-      {button.name}
+      {button.name.toUpperCase()}
     </button>
   );
 }

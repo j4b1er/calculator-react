@@ -10,19 +10,19 @@ const initialState = {
   backNum: "0",
   mathAction: "",
   mathSign: "",
-  result: null,
 };
 
 function reducer(state, action) {
   const frontNumArr = state.frontNum.split("");
   const frontNumArrLength = frontNumArr.length;
   const backNumArr = state.backNum.split(" ");
+
+  const operation = state.backNum.includes("=")
+    ? state.frontNum + state.mathSign + backNumArr.at(2)
+    : backNumArr.at(0) + state.mathSign + state.frontNum;
+
   const resultFunc =
-    state.backNum !== "0"
-      ? Function(
-          "return " + backNumArr.at(0) + state.mathSign + state.frontNum
-        )()
-      : "0";
+    state.backNum !== "0" ? Function("return " + operation)() : "0";
 
   switch (action.type) {
     case "num":
@@ -66,7 +66,13 @@ function reducer(state, action) {
         ...state,
         frontNum: state.backNum !== "0" ? `${resultFunc}` : state.frontNum,
         backNum:
-          state.backNum !== "0" ? `${state.backNum} ${state.frontNum} =` : "0",
+          state.backNum !== "0"
+            ? state.backNum.includes("=")
+              ? backNumArr
+                  .map((number, i) => (i === 0 ? state.frontNum : number))
+                  .join(" ")
+              : `${state.backNum} ${state.frontNum} =`
+            : state.backNum,
       };
 
     case "period":
@@ -86,8 +92,7 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ frontNum, backNum, mathAction, mathSign, result }, dispatch] =
-    useReducer(reducer, initialState);
+  const [{ frontNum, backNum }, dispatch] = useReducer(reducer, initialState);
 
   useKey(buttons, dispatch);
 
