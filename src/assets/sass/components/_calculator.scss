@@ -1,7 +1,8 @@
 .calculator {
   height: 560px;
   width: 300px;
-  background-color: $color-black-900;
+  // background-color: $color-black-900;
+  background-color: var(--background-color);
   border-radius: 1.25rem;
   overflow: hidden;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -9,8 +10,7 @@
 
   border: 1px solid $color-black-300;
 
-  // display: flex;
-  // flex-flow: column nowrap;
+  transition: all 0.5s ease-in-out;
 
   &__header {
     height: 160px;

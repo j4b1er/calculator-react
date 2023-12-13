@@ -6,17 +6,29 @@
   padding: 0;
 }
 
-body {
+.app {
   min-height: 100vh;
   padding: 1rem;
-  background-color: $color-black-900;
-  background: radial-gradient(
-    circle at 30% 10%,
-    $color-purple-accent-900,
-    $color-black-900 50%
-  );
+  background: var(--background-color);
+  // background: radial-gradient(
+  //   circle at var(--circle-x-pos) 10%,
+  //   var(--secondary-background-color),
+  //   rgba(0, 0, 0, 0) 50%
+  // );
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: all 0.5s ease-in-out;
+
+  &[data-theme="dark"] {
+    --background-color: #121212;
+    --secondary-background-color: #2d1356;
+  }
+
+  &[data-theme="light"] {
+    --background-color: #ffffff;
+    --secondary-background-color: #c035c3;
+  }
 }

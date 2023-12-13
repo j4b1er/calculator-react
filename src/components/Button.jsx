@@ -9,7 +9,12 @@ export default function Button({ button, dispatch, theme }) {
         button.name === "0" ? `${button.action}-${button.name}` : button.action
       }`}
       onClick={handleClick}>
-      {button.name.toUpperCase()}
+      {button.name === "theme"
+        ? theme === "dark"
+          ? "☀️"
+          : "🌙"
+        : button.name.toUpperCase()}
+      {/* {button.name.toUpperCase()} */}
     </button>
   );
 }
