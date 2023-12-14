@@ -10,7 +10,7 @@ const initialState = {
   backNum: "0",
   mathAction: "",
   mathSign: "",
-  theme: "light",
+  theme: "dark",
 };
 
 function reducer(state, action) {
@@ -90,7 +90,7 @@ function reducer(state, action) {
       };
 
     case "clear":
-      return { ...initialState };
+      return { ...initialState, theme: state.theme };
 
     default:
       throw new Error("Unknown action");
