@@ -14,9 +14,6 @@
   justify-content: center;
   transition: all 0.3s ease-in-out; }
   .app[data-theme="dark"] {
-    --bg-color: #141414;
-    --background-color: #121212;
-    --secondary-background-color: #2d1356;
     --primary-color-100: #2c2b2b;
     --primary-color-300: #1a1a1a;
     --primary-color-600: #141414;
@@ -25,8 +22,6 @@
     --accent-color-900: #2d1356;
     --text-color: #ffffff; }
   .app[data-theme="light"] {
-    --background-color: #ffffff;
-    --secondary-background-color: #c035c3;
     --primary-color-100: #cdcdcd;
     --primary-color-300: #dedede;
     --primary-color-600: #ededed;
