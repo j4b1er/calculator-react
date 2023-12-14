@@ -5,12 +5,14 @@ import { buttons } from "../data/buttons";
 import { useReducer } from "react";
 import { useKey } from "../hooks/useKey";
 
+const darkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
 const initialState = {
   frontNum: "0",
   backNum: "0",
   mathAction: "",
   mathSign: "",
-  theme: "dark",
+  theme: darkTheme ? "dark" : "light",
 };
 
 function reducer(state, action) {
