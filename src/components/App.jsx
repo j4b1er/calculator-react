@@ -4,15 +4,18 @@ import Button from "./Button";
 import { buttons } from "../data/buttons";
 import { useReducer } from "react";
 import { useKey } from "../hooks/useKey";
+import { useLocalStorageState } from "../hooks/useLocalStorageState";
 
 const darkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const systemTheme = darkTheme ? "dark" : "light";
 
 const initialState = {
   frontNum: "0",
   backNum: "0",
   mathAction: "",
   mathSign: "",
-  theme: darkTheme ? "dark" : "light",
+  // theme: darkTheme ? "dark" : "light",
+  theme: "",
 };
 
 function reducer(state, action) {
@@ -101,10 +104,15 @@ function reducer(state, action) {
 
 export default function App() {
   //move initial state inside App(or it might not be needed) and render in useReducer depding of there is a stored variable or else send regular initial state. also change the clear to reset everything to initial state manually
-  const [{ frontNum, backNum, theme }, dispatch] = useReducer(
-    reducer,
-    initialState
+  const [themeValue, setThemeValue] = useLocalStorageState(
+    systemTheme,
+    "theme"
   );
+
+  const [{ frontNum, backNum, theme }, dispatch] = useReducer(reducer, {
+    ...initialState,
+    theme: themeValue,
+  });
 
   useKey(buttons, dispatch);
 
@@ -131,6 +139,8 @@ export default function App() {
               button={btn}
               dispatch={dispatch}
               theme={theme}
+              themeValue={themeValue}
+              onThemeValue={setThemeValue}
               key={btn.name}
             />
           ))}

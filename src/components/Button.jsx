@@ -1,6 +1,18 @@
-export default function Button({ button, dispatch, theme }) {
+export default function Button({
+  button,
+  dispatch,
+  theme,
+  themeValue,
+  onThemeValue,
+}) {
   function handleClick() {
-    dispatch({ type: button.action, payload: button });
+    if (button.name === "theme") {
+      const themeSelected = themeValue === "dark" ? "dark" : "light";
+      onThemeValue(themeSelected);
+      dispatch({ type: button.action, payload: button });
+    } else {
+      dispatch({ type: button.action, payload: button });
+    }
   }
 
   return (
@@ -14,7 +26,6 @@ export default function Button({ button, dispatch, theme }) {
           ? "☀️"
           : "🌙"
         : button.name.toUpperCase()}
-      {/* {button.name.toUpperCase()} */}
     </button>
   );
 }
