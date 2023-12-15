@@ -13,13 +13,15 @@ export default function Button({ button, dispatch, theme, onThemeValue }) {
     <button
       className={`btn btn__${
         button.name === "0" ? `${button.action}-${button.name}` : button.action
-      }`}
+      } ${button.name === "theme" ? `btn__${theme}` : ""}`}
       onClick={handleClick}>
-      {button.name === "theme"
-        ? theme === "dark"
-          ? "☀️"
-          : "🌙"
-        : button.name.toUpperCase()}
+      <span>
+        {button.name === "theme"
+          ? theme === "dark"
+            ? "☀️"
+            : "🌕"
+          : button.name.toUpperCase()}
+      </span>
     </button>
   );
 }

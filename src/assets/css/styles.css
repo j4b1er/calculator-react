@@ -20,7 +20,8 @@
     --primary-color-900: #121212;
     --accent-color-300: #c035c3;
     --accent-color-900: #2d1356;
-    --text-color: #ffffff; }
+    --text-color: #ffffff;
+    --theme-btn-bg: #dedede; }
   .app[data-theme="light"] {
     --primary-color-100: #cdcdcd;
     --primary-color-300: #dedede;
@@ -28,7 +29,8 @@
     --primary-color-900: #f9f9f9;
     --accent-color-300: #df3fe2;
     --accent-color-900: #c035c3;
-    --text-color: #000000; }
+    --text-color: #000000;
+    --theme-btn-bg: #1a1a1a; }
 
 .calculator {
   height: 560px;
@@ -89,6 +91,23 @@
   transition: all 0.3s ease-in-out; }
   .btn:hover {
     background-color: var(--primary-color-100); }
+  .btn__dark {
+    overflow: hidden;
+    font-size: 4rem;
+    background-color: var(--theme-btn-bg); }
+    .btn__dark > span {
+      display: block;
+      transform: translate(5px, -30px);
+      transition: all 0.3s ease-in-out; }
+  .btn__light {
+    overflow: hidden;
+    font-size: 4rem;
+    background-color: var(--theme-btn-bg); }
+    .btn__light > span {
+      display: block;
+      transform: translate(-35px, -30px);
+      transform-origin: unset;
+      transition: all 0.3s ease-in-out; }
   .btn__division {
     font-size: 1.75rem; }
   .btn__subtract {
