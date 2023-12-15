@@ -100,6 +100,7 @@ function reducer(state, action) {
 }
 
 export default function App() {
+  //move initial state inside App(or it might not be needed) and render in useReducer depding of there is a stored variable or else send regular initial state. also change the clear to reset everything to initial state manually
   const [{ frontNum, backNum, theme }, dispatch] = useReducer(
     reducer,
     initialState
