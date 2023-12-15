@@ -1,13 +1,7 @@
-export default function Button({
-  button,
-  dispatch,
-  theme,
-  themeValue,
-  onThemeValue,
-}) {
+export default function Button({ button, dispatch, theme, onThemeValue }) {
   function handleClick() {
     if (button.name === "theme") {
-      const themeSelected = themeValue === "dark" ? "dark" : "light";
+      const themeSelected = theme === "dark" ? "light" : "dark";
       onThemeValue(themeSelected);
       dispatch({ type: button.action, payload: button });
     } else {
