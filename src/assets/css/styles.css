@@ -89,25 +89,20 @@
   border: none;
   border-radius: 0.75rem;
   transition: all 0.3s ease-in-out; }
-  .btn:hover {
+  .btn:hover, .btn:active {
     background-color: var(--primary-color-100); }
-  .btn__dark {
+  .btn__switchTheme {
     overflow: hidden;
     font-size: 4rem;
     background-color: var(--theme-btn-bg); }
-    .btn__dark > span {
-      display: block;
-      transform: translate(5px, -30px);
-      transition: all 0.3s ease-in-out; }
-  .btn__light {
-    overflow: hidden;
-    font-size: 4rem;
-    background-color: var(--theme-btn-bg); }
-    .btn__light > span {
-      display: block;
-      transform: translate(-35px, -30px);
-      transform-origin: unset;
-      transition: all 0.3s ease-in-out; }
+  .btn__dark > span {
+    display: block;
+    transform: translate(5px, -30px);
+    transition: all 0.3s ease-in-out; }
+  .btn__light > span {
+    display: block;
+    transform: translate(-35px, -30px);
+    transition: all 0.3s ease-in-out; }
   .btn__division {
     font-size: 1.75rem; }
   .btn__subtract {

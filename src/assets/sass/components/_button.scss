@@ -10,15 +10,18 @@
 
   transition: all 0.3s ease-in-out;
 
-  &:hover {
+  &:hover,
+  &:active {
     background-color: var(--primary-color-100);
   }
 
-  &__dark {
+  &__switchTheme {
     overflow: hidden;
     font-size: 4rem;
     background-color: var(--theme-btn-bg);
+  }
 
+  &__dark {
     & > span {
       display: block;
       transform: translate(5px, -30px);
@@ -27,14 +30,9 @@
   }
 
   &__light {
-    overflow: hidden;
-    font-size: 4rem;
-    background-color: var(--theme-btn-bg);
-
     & > span {
       display: block;
       transform: translate(-35px, -30px);
-      transform-origin: unset;
       transition: all 0.3s ease-in-out;
     }
   }
